@@ -1,9 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import BoardProvider from "./components/BoardProvider"
+import KanbanBoard from "./components/KanbanBoard"
+import "./index.css"
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <h1>Vite Project</h1>
-  </React.StrictMode>,
+    <BoardProvider>
+      <KanbanBoard />
+    </BoardProvider>
+  </React.StrictMode>
 )

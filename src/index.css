@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  @apply bg-black text-white;
+
+  color-scheme: light dark;
+}
+
+@layer components {
+  .task::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .task::-webkit-scrollbar-thumb {
+    @apply bg-indigo-700 rounded-xl;
+  }
+}
