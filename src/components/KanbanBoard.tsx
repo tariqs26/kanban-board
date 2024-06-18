@@ -44,10 +44,8 @@ export default function KanbanBoard() {
       return
     }
 
-    if (e.active.data.current?.type == "Task") {
+    if (e.active.data.current?.type == "Task") 
       setActiveTask(e.active.data.current.task)
-      return
-    }
   }
 
   function handleDragEnd(event: DragEndEvent) {
