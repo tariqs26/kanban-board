@@ -1,18 +1,12 @@
-import { useSortable } from "@dnd-kit/sortable"
+import { useState } from "react"
+import { useSortable, SortableContext } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { Column } from "../types"
 import { useBoard } from "./BoardProvider"
 import { Plus, Trash } from "./icons"
-import { SortableContext } from "@dnd-kit/sortable"
-
-import { useState } from "react"
 import TaskCard from "./TaskCard"
 
-type Props = {
-  column: Column
-}
-
-export default function ColumnContainer({ column }: Props) {
+export default function ColumnContainer({ column }: { column: Column}) {
   const [editMode, setEditMode] = useState(false)
 
   const {
