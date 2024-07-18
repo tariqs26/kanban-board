@@ -23,10 +23,7 @@ export default function TaskCard({ task }: Props) {
     isDragging,
   } = useSortable({
     id: task.id,
-    data: {
-      type: "Task",
-      task,
-    },
+    data: { type: "Task", task },
     disabled: editMode,
   })
 
@@ -39,7 +36,7 @@ export default function TaskCard({ task }: Props) {
     setEditMode((prev) => !prev)
   }
 
-  if (isDragging) {
+  if (isDragging)
     return (
       <div
         ref={setNodeRef}
@@ -47,7 +44,6 @@ export default function TaskCard({ task }: Props) {
         className="bg-background p-4 rounded-md flex items-center ring-2 ring-transparent transition-all cursor-grab relative group ring-inset h-[100px] opacity-50 border-2 border-indigo-500"
       />
     )
-  }
 
   return (
     <div
@@ -62,6 +58,7 @@ export default function TaskCard({ task }: Props) {
         <textarea
           className="px-2 py-1 rounded-md outline-none ring-2 ring-transparent focus:ring-indigo-500/50 transition-all w-full bg-transparent resize-none"
           value={task.content}
+          autoFocus
           onClick={(e) => {
             e.stopPropagation()
           }}
@@ -74,7 +71,6 @@ export default function TaskCard({ task }: Props) {
             const lengthOfInput = e.target.value.length
             return e.target.setSelectionRange(lengthOfInput, lengthOfInput)
           }}
-          autoFocus
         />
       ) : (
         <p className="whitespace-pre-wrap overflow-x-auto overflow-y-auto task h-[90%] w-full">
