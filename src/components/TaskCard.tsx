@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { useState } from "react"
-import { Task } from "../types"
+import type { Task } from "../types"
 import { cn } from "../utils"
 import { useBoard } from "./BoardProvider"
 import { Trash } from "./icons"
@@ -60,7 +60,6 @@ export default function TaskCard({ task }: Props) {
     >
       {editMode ? (
         <textarea
-          autoFocus
           className="px-2 py-1 rounded-md outline-none ring-2 ring-transparent focus:ring-indigo-500/50 transition-all w-full bg-transparent resize-none"
           value={task.content}
           onClick={(e) => {
@@ -71,6 +70,11 @@ export default function TaskCard({ task }: Props) {
           }}
           onChange={(e) => editTaskContent(task.id, e.currentTarget.value)}
           onBlur={toggleEditMode}
+          onFocus={(e) => {
+            const lengthOfInput = e.target.value.length
+            return e.target.setSelectionRange(lengthOfInput, lengthOfInput)
+          }}
+          autoFocus
         />
       ) : (
         <p className="whitespace-pre-wrap overflow-x-auto overflow-y-auto task h-[90%] w-full">
@@ -78,6 +82,7 @@ export default function TaskCard({ task }: Props) {
         </p>
       )}
       <button
+        type="button"
         className={cn(
           "rounded-md px-2 py-1 hover:bg-column-background text-gray-500 hover:text-red-500 transition-colors absolute right-4 top-1/2 -translate-y-1/2 hidden group-hover:block",
           editMode && "group-hover:hidden"
