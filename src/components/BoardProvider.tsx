@@ -1,6 +1,6 @@
 import { arrayMove } from "@dnd-kit/sortable"
 import { createContext, useContext, useMemo, useState } from "react"
-import { Column, Task, Id } from "../types"
+import type { Column, Task, Id } from "../types"
 import { generateId } from "../utils"
 
 type ActiveColumn = Column | null

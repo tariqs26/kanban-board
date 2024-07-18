@@ -1,6 +1,6 @@
 import {
   DndContext,
-  DragOverEvent,
+  type DragOverEvent,
   DragOverlay,
   PointerSensor,
   useSensor,
@@ -39,12 +39,12 @@ export default function KanbanBoard() {
   const items = columns.map((column) => column.id)
 
   function handleDragStart(e: DragStartEvent) {
-    if (e.active.data.current?.type == "Column") {
+    if (e.active.data.current?.type === "Column") {
       setActiveColumn(e.active.data.current.column)
       return
     }
 
-    if (e.active.data.current?.type == "Task") 
+    if (e.active.data.current?.type === "Task")
       setActiveTask(e.active.data.current.task)
   }
 
@@ -89,7 +89,7 @@ export default function KanbanBoard() {
       const activeIndex = taskItems.indexOf(active.id)
       const overIndex = taskItems.indexOf(over.id)
 
-      if (tasks[activeIndex].columnId != tasks[overIndex].columnId) {
+      if (tasks[activeIndex].columnId !== tasks[overIndex].columnId) {
         tasks[activeIndex].columnId = tasks[overIndex].columnId
         return swapTask(activeIndex, overIndex - 1)
       }
@@ -125,6 +125,7 @@ export default function KanbanBoard() {
             </SortableContext>
           </div>
           <button
+            type="button"
             onClick={createColumn}
             className="h-14 min-w-[350px] rounded-lg bg-background border-2 border-column-background p-4 ring-indigo-500 hover:ring-2 transition-all hover:bg-column-background/80 flex items-center gap-2 justify-center group"
           >
