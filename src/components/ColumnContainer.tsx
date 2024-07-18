@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { useSortable, SortableContext } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import { Column } from "../types"
+import type { Column } from "../types"
 import { useBoard } from "./BoardProvider"
 import { Plus, Trash } from "./icons"
 import TaskCard from "./TaskCard"
 
-export default function ColumnContainer({ column }: { column: Column}) {
+export default function ColumnContainer({ column }: { column: Column }) {
   const [editMode, setEditMode] = useState(false)
 
   const {
@@ -59,20 +59,24 @@ export default function ColumnContainer({ column }: { column: Column}) {
           <input
             defaultValue={column.title}
             className="bg-column-background focus:outline-none ring-2 ring-transparent focus:ring-indigo-500 flex-grow px-2 py-1 rounded-md"
-            autoFocus
             onKeyDown={(e) => {
               if (e.key !== "Enter" || e.currentTarget.value === "") return
               editColumnTitle(column.id, e.currentTarget.value)
               setEditMode(false)
             }}
             onBlur={() => setEditMode(false)}
+            autoFocus
           />
         ) : (
-          <p onClick={() => setEditMode(true)} className="flex-grow px-2 py-1">
+          <button
+            onClick={() => setEditMode(true)}
+            className="flex-grow px-2 py-1"
+          >
             {column.title}
-          </p>
+          </button>
         )}
         <button
+          type="button"
           className="ml-auto rounded-md px-2 py-1 hover:bg-column-background text-gray-500 hover:text-red-500 transition-colors"
           onClick={() => deleteColumn(column.id)}
         >
@@ -87,6 +91,7 @@ export default function ColumnContainer({ column }: { column: Column}) {
         </SortableContext>
       </div>
       <button
+        type="button"
         onClick={() => createTask(column.id)}
         className="rounded-md bg-column-background py-2 px-4 font-medium ring-indigo-500 hover:ring-2 transition-all hover:bg-column-background/80 flex items-center gap-2 group"
       >
