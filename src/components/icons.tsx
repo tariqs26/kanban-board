@@ -8,7 +8,7 @@ const baseProps = {
   stroke: "currentColor",
 } as const
 
-type Props = JSX.IntrinsicElements["svg"]
+type Props = Readonly<JSX.IntrinsicElements["svg"]>
 
 const generateProps = ({ className, ...props }: Props) => ({
   className: cn("w-6 h-6", className),

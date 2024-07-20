@@ -1,6 +1,7 @@
-import { arrayMove } from "@dnd-kit/sortable"
 import { createContext, useContext, useMemo, useState } from "react"
-import type { Column, Task, Id } from "../types"
+import { arrayMove } from "@dnd-kit/sortable"
+
+import type { Column, Id, Task } from "../types"
 import { generateId } from "../utils"
 
 type ActiveColumn = Column | null
@@ -27,9 +28,9 @@ const boardContext = createContext<BoardContext | null>(null)
 
 export default function BoardProvider({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   const [columns, setColumns] = useState<Column[]>([])
   const [activeColumn, setActiveColumn] = useState<ActiveColumn>(null)
   const [activeTask, setActiveTask] = useState<ActiveTask>(null)

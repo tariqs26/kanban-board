@@ -1,12 +1,17 @@
 import { useState } from "react"
-import { useSortable, SortableContext } from "@dnd-kit/sortable"
+import { SortableContext, useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+
 import type { Column } from "../types"
 import { useBoard } from "./BoardProvider"
-import { Plus, Trash } from "./icons"
 import TaskCard from "./TaskCard"
+import { Plus, Trash } from "./icons"
 
-export default function ColumnContainer({ column }: { column: Column }) {
+type Props = Readonly<{
+  column: Column
+}>
+
+export default function ColumnContainer({ column }: Props) {
   const [editMode, setEditMode] = useState(false)
 
   const {
@@ -38,21 +43,21 @@ export default function ColumnContainer({ column }: { column: Column }) {
     return (
       <div
         ref={setNodeRef}
-        className="bg-column-background w-[350px] max-h-[500px] h-[500px] flex flex-col opacity-50 border-2 border-indigo-500 rounded-md"
+        className="bg-column-background w-[350px] flex flex-col opacity-50 border-2 border-indigo-500 rounded-md shrink-0 max-h-[500px] h-[500px]"
       />
     )
   }
 
   return (
     <div
-      className="bg-column-background w-[350px] max-h-[500px] h-[500px] flex flex-col rounded-md"
+      className="bg-column-background w-[350px] flex flex-col rounded-md shrink-0 max-h-[500px] h-[500px]"
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
     >
-      <header className="bg-background text-lg cursor-grab rounded-t-md p-3 font-semibold  flex items-center gap-2">
-        <p className="px-2 py-1 text-sm bg-column-background rounded-full">
+      <header className="bg-background text-lg cursor-grab rounded-t-md p-3 font-semibold flex items-center gap-2">
+        <p className="px-3 py-1.5 text-sm bg-column-background rounded-full">
           {filteredTasks.length}
         </p>
         {editMode ? (
@@ -69,6 +74,7 @@ export default function ColumnContainer({ column }: { column: Column }) {
           />
         ) : (
           <button
+            type="button"
             onClick={() => setEditMode(true)}
             className="flex-grow px-2 py-1"
           >
@@ -93,7 +99,7 @@ export default function ColumnContainer({ column }: { column: Column }) {
       <button
         type="button"
         onClick={() => createTask(column.id)}
-        className="rounded-md bg-column-background py-2 px-4 font-medium ring-indigo-500 hover:ring-2 transition-all hover:bg-column-background/80 flex items-center gap-2 group"
+        className="rounded-md bg-background py-3 px-4 font-medium ring-indigo-500 hover:ring-2 transition-all hover:bg-background/80 flex items-center gap-2 rounded-t-none"
       >
         <Plus />
         Add Task

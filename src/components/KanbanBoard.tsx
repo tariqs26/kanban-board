@@ -1,15 +1,16 @@
+import { createPortal } from "react-dom"
 import {
   DndContext,
+  type DragEndEvent,
   type DragOverEvent,
   DragOverlay,
+  type DragStartEvent,
   PointerSensor,
   useSensor,
   useSensors,
-  type DragEndEvent,
-  type DragStartEvent,
 } from "@dnd-kit/core"
 import { SortableContext } from "@dnd-kit/sortable"
-import { createPortal } from "react-dom"
+
 import { useBoard } from "./BoardProvider"
 import ColumnContainer from "./ColumnContainer"
 import TaskCard from "./TaskCard"
