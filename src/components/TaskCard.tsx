@@ -1,14 +1,15 @@
+import { useState } from "react"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import { useState } from "react"
+
 import type { Task } from "../types"
 import { cn } from "../utils"
 import { useBoard } from "./BoardProvider"
 import { Trash } from "./icons"
 
-type Props = {
+type Props = Readonly<{
   task: Task
-}
+}>
 
 export default function TaskCard({ task }: Props) {
   const { deleteTask, editTaskContent } = useBoard()
@@ -41,14 +42,14 @@ export default function TaskCard({ task }: Props) {
       <div
         ref={setNodeRef}
         style={style}
-        className="bg-background p-4 rounded-md flex items-center ring-2 ring-transparent transition-all cursor-grab relative group ring-inset h-[100px] opacity-50 border-2 border-indigo-500"
+        className="bg-background p-4 rounded-md flex items-center ring-2 ring-transparent transition-all cursor-grab relative group ring-inset h-[90px] opacity-50 border-2 border-indigo-500 shrink-0"
       />
     )
 
   return (
-    <div
+    <button
       ref={setNodeRef}
-      className="bg-background p-4 rounded-md flex items-center ring-2 ring-transparent transition-all cursor-grab relative group ring-inset hover:ring-indigo-500 h-[100px]"
+      className="bg-background p-4 rounded-md flex items-center ring-2 ring-transparent transition-all cursor-grab relative group ring-inset hover:ring-indigo-500 h-[90px] text-left shrink-0 w-full"
       style={style}
       onClick={toggleEditMode}
       {...listeners}
@@ -87,6 +88,6 @@ export default function TaskCard({ task }: Props) {
       >
         <Trash />
       </button>
-    </div>
+    </button>
   )
 }
